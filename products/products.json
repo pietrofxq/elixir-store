@@ -1,0 +1,15 @@
+[{
+  "code": "VOUCHER",
+  "name": "NoviCap Voucher",
+  "price": 500
+},
+{
+  "code": "TSHIRT",
+  "name": "NoviCap T-Shirt",
+  "price": 2000
+},
+{
+  "code": "MUG",
+  "name": "NoviCap Coffee Mug",
+  "price": 750
+}]
