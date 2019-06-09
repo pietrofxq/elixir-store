@@ -40,7 +40,7 @@ defmodule StoreTest do
     end
   end
 
-  describe "Store.total" do
+  describe "Store.total with all rules" do
     test "total is 0.00€ when there are no products" do
       assert Store.total() == "0.00€"
     end
@@ -90,6 +90,29 @@ defmodule StoreTest do
       assert :ok = Store.scan("TSHIRT")
 
       assert Store.total() == "74.50€"
+    end
+  end
+
+  describe "Store.total without rules" do
+    test "VOUCHER, and VOUCHER should cost 10.00€" do
+      Store.scan("VOUCHER")
+      Store.scan("VOUCHER")
+
+      assert Store.total() == "10.00€"
+    end
+
+    test "5x TSHIRT should cost 100.00€" do
+      1..5
+      |> Enum.each(fn _ -> Store.scan("TSHIRT") end)
+
+      assert Store.total() == "100.00€"
+    end
+
+    test "3x MUG should cost 22.50€" do
+      1..3
+      |> Enum.each(fn _ -> Store.scan("MUG") end)
+
+      assert Store.total() == "22.50€"
     end
   end
 
