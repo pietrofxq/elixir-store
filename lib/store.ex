@@ -30,15 +30,11 @@ defmodule NovicapChallenge.Store do
       end)
 
     rules_difference =
-      if MapSet.size(rules) > 0 do
-        rules
-        |> Enum.map(fn rule ->
-          rule.(products)
-        end)
-        |> Enum.reduce(0, fn difference, acc -> acc + difference.amount end)
-      else
-        0
-      end
+      rules
+      |> Enum.map(fn rule ->
+        rule.(products)
+      end)
+      |> Enum.reduce(0, fn difference, acc -> acc + difference.amount end)
 
     Money.add(total, rules_difference)
     |> Money.to_string(symbol_on_right: true)
