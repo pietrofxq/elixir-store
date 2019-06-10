@@ -10,6 +10,7 @@ defmodule NovicapChallenge.ProductsManager do
     Agent.start_link(fn -> %{} end, name: __MODULE__)
   end
 
+  @spec load_products(binary()) :: :ok
   def load_products(filename \\ "products") do
     file = File.read!("./products/#{filename}.json")
 
@@ -25,6 +26,7 @@ defmodule NovicapChallenge.ProductsManager do
     Agent.get(__MODULE__, & &1)
   end
 
+  @spec get_product_by_code(binary()) :: Product.t() | no_return
   def get_product_by_code(code) do
     case Map.fetch(get_products(), code) do
       {:ok, value} -> value
