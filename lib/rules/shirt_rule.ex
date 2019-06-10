@@ -9,10 +9,8 @@ defmodule NovicapChallenge.Rules.ShirtRule do
   def apply_rule(products) do
     total_tshirts = Enum.count(products, &RuleBehaviour.filter_by_code(&1, "TSHIRT"))
 
-    if total_tshirts >= 3 do
-      Money.new(-100 * total_tshirts)
-    else
-      Money.new(0)
-    end
+    if total_tshirts >= 3,
+      do: Money.new(-100 * total_tshirts),
+      else: Money.new(0)
   end
 end
